@@ -16,32 +16,38 @@ import java.util.Date;
 
 public class editEmotion extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Emotion> array;
-    String filename;
+    private  ArrayList<Emotion> array;
+
+    private String filename;
+
     int position;
 
-    Button Save_Button, Delete_Button, Cancel;
-    EditText Edit_Emotion, Edit_Descr, Edit_Time;
-    TextView errorOut;
+    private EditText Edit_Emotion, Edit_Descr, Edit_Time;
 
-    Intent go_home,go_display;
+    private TextView errorOut;
 
+    private Intent go_home,go_display;
 
+    /**
+     *
+     * Initializes all buttons on the view as well as the two intents used to either go back
+     * home to the MainActivity or the Display activity depending on where the user came from.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_emotion);
 
-        Save_Button = findViewById(R.id.save);
+        Button Save_Button = findViewById(R.id.save);
         Save_Button.setOnClickListener(this);
-        Delete_Button = findViewById(R.id.delete);
+        Button Delete_Button = findViewById(R.id.delete);
         Delete_Button.setOnClickListener(this);
 
         Edit_Emotion = findViewById(R.id.editEmotion);
         Edit_Descr = findViewById(R.id.editDescr);
         Edit_Time = findViewById(R.id.editTime);
 
-        Cancel = findViewById(R.id.cancel);
+        Button Cancel = findViewById(R.id.cancel);
         Cancel.setOnClickListener(this);
 
         errorOut = findViewById(R.id.error);
@@ -60,6 +66,11 @@ public class editEmotion extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    /**
+     *
+     * Figures out which button was clicked, and checks to make sure the inputs are valid through checkconstraints()
+     * If there are any invalid inputs, it will print out an error message
+     */
     @Override
     public void onClick(View v){
         int viewId = v.getId();
@@ -89,6 +100,11 @@ public class editEmotion extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    /**
+     *
+     * Checks the constraints on the entered parameters to make sure they are to spec
+     * Compiles any found errors into an String ArrayList and returns them to onClick
+     */
     public ArrayList<String> checkConstraints(){
         ArrayList<String> errors = new ArrayList<>();
         String[] validEmotions = {"Happy","Sad","Surprise","Fear","Anger","Love"};
@@ -110,6 +126,11 @@ public class editEmotion extends AppCompatActivity implements View.OnClickListen
         return errors;
     }
 
+    /**
+     *
+     * If cancel or delete is clicked, or if save emotion is clicked and all the inputs are valid, it will
+     * exit the program to the save activity that access the editEmotion activity.
+     */
     public void exit(){
         if (getIntent().getStringExtra("path").equals("main") || array.size()==0) {
             startActivity(go_home);

@@ -18,7 +18,14 @@ import java.util.Date;
 
 public class fileUpdate {
 
-
+    /**
+     *
+     * This will save a given array object to a specified filepath in internal memory
+     *
+     * @param context The state in which the file is regarding
+     * @param fname The filename path to the file saved in memory
+     * @param array The array object to be written
+     */
     public static void saveState(Context context, String fname,ArrayList<Emotion> array) {
         /*https://www.quora.com/How-do-I-save-an-object-to-a-file-in-Android*/
         FileOutputStream filewrite;
@@ -36,6 +43,16 @@ public class fileUpdate {
         }
     }
 
+    /**
+     *
+     * This will receive a given arraylist and return it to the activity accessing it
+     *
+     * @param context The state in which the file is regarding
+     * @param fname The filename path to the file saved in memory
+     * @param array The array object to be written
+     *
+     * @return Returns an array list of type Emotion
+     */
     public static ArrayList<Emotion> loadState(Context context, String fname, ArrayList<Emotion> array) {
         /*https://www.quora.com/How-do-I-save-an-object-to-a-file-in-Android*/
         FileInputStream filein;
@@ -62,6 +79,14 @@ public class fileUpdate {
         }
         return array;
     }
+
+    /**
+     * Sorts an array list of type Emotion to descending order regarding date.
+     *
+     * @param array An arraylist of type Emotion that is not sorted by date
+     *
+     * @return An array list of type Emotion that is sorted in descending order with repect to date
+     */
     public static ArrayList<Emotion> sortArray(ArrayList<Emotion> array){
         int largerDate;
         ArrayList<Emotion> new_array = new ArrayList<>();
@@ -82,7 +107,16 @@ public class fileUpdate {
         return new_array;
 
     }
-    public static boolean dateCompare(String date1, String date2) throws ParseException {
+
+    /**
+     * Compares two dates to figure out which occured before/after the other.
+     *
+     * @param date1 The first date to be compared
+     * @param date2 The second date to be compared
+     * @return Returns True if the first date is before the second date, and false if not.
+     * @throws ParseException To make sure the file could be read
+     */
+    private static boolean dateCompare(String date1, String date2) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date firstDate = format.parse(date1);
         Date secondDate = format.parse(date2);

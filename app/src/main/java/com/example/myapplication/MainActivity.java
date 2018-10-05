@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public ArrayList<String> feelings;
 
-    public String filename;
+    public static String filename;
 
     ArrayList<Emotion> feeling_array;
 
@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Bundle newEmotion;
     //public TextView number_of_character;
 
+    /**
+     * Initializes all buttons and array lists required for the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         countEmotion();
     }
-
+    /**
+     *Updates the array from the saved file to ensure accurate data
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -95,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         countEmotion();
     }
 
+    /**
+     *
+     * Determines which button was clicked and adds it to the array list
+     */
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
@@ -136,6 +145,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Adds the instance of a feeling to an arraylist of type emotion, saving its value and updating
+     * it in the program. It will then display a toast message to notify the user the it has been added.
+     * If the description is over the 100 character limit, it will reject the addition and notify the user
+     * that they have exceeded the bounds.
+     *
+     * @param feeling An instance of emotion to be added to an arraylist of type Emotion
+     */
     public void add_entry(String feeling) {
         op_descr = Optional_Description.getText().toString().trim();
         if (op_descr.length() <= 100) {
@@ -150,12 +167,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Sends the user to the Display activity to view all the emotions that have been entered
+     */
     public void viewEntries(){
         fileUpdate.saveState(this,filename,feeling_array);
         startActivity(submitFeeling);
     }
 
-
+    /**
+     * Counts the particular occurence of a given emotion, and returns the count of that emotion
+     * to the program to be displayed.
+     *
+     * @param state A string of a particular state to be found within an arraylist of type Emotion
+     * @return Returns a count of the number of the emotional state in the arraylist
+     */
     public int getCount(String state) {
         int count=0;
         for (Emotion temp: feeling_array){
@@ -165,31 +191,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return count;
     }
+
+    /**
+     * Updates the count of happy emotions recorded
+     */
     public void setHappy(){
         String happytext = "Happy\nCount: "+getCount("Happy");
         HappyText.setText(happytext);
     }
+
+    /**
+     * Updates the count of sad emotions recorded
+     */
     public void setSad(){
         String sadtext = "Sad\nCount: "+getCount("Sad");
         SadText.setText(sadtext);
     }
+
+    /**
+     * Updates the count of angry emotions recorded
+     */
     public void setAngry(){
         String angrytext = "Angry\nCount: "+getCount("Anger");
         AngryText.setText(angrytext);
     }
+
+    /**
+     * Updates the count of fear emotions recorded
+     */
     public void setFear(){
         String feartext = "Fear\nCount: "+getCount("Fear");
         FearText.setText(feartext);
     }
+
+    /**
+     * Updates the count of surprise emotions recorded
+     */
     public void setSurprise(){
         String surprisetext = "Surprise\nCount: "+getCount("Surprise");
         SurpriseText.setText(surprisetext);
     }
+
+    /**
+     * Updates the count of love emotions recorded
+     */
     public void setLove(){
         String lovetext = "Love\nCount: "+getCount("Love");
         LoveText.setText(lovetext);
     }
 
+    /**
+     * Updates the count of all emotions recorded
+     */
     public void countEmotion(){
         setHappy();
         setSad();
@@ -198,9 +251,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setLove();
         setFear();
     }
-    public void resetDatabase(){
-        feeling_array = new ArrayList<>() ;
-        fileUpdate.saveState(this,filename,feeling_array);
-        countEmotion();
-    }
+
 }
