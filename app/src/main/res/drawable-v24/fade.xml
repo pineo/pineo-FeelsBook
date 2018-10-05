@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--creates a turquoise to black fade-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient
+                android:angle="90"
+                android:endColor="@color/colorPrimary"
+                android:startColor="#000000"/>
+        </shape>
+    </item>
+</selector>
+
+
+<!-- Reference: https://stackoverflow.com/questions/5976805/android-linearlayout-gradient-background-->

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">pineo-FeelsBook</string>
+    <string name="Fear">Fear</string>
+    <string name="Sad">Sad</string>
+    <string name="Surprise">Surprise</string>
+    <string name="Happy">Happy</string>
+    <string name="Love">Love</string>
+    <string name="Anger">Anger</string>
+    <string name="hello">Hello</string>
+    <string name="chars_100">(Max Chars 100)</string>
+    <string name="enter_text">Enter Optional Description Here</string>
+    <string name="sub_button">Record</string>
+    <string name="filename">emotionStorage</string>
+</resources>
